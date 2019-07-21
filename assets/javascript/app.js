@@ -1,48 +1,47 @@
-$(document).ready(function() {
-    var correctAnswers = 0; //counting correctly answered questions
-    var incorrectAnswers = 0; //counting incorrect questions
-    var questionTimer; //set timer
-    var counter = 0; //counting which question we're on 
+var correctAnswers = 0; //counting correctly answered questions
+var incorrectAnswers = 0; //counting incorrect questions
+var questionTimer; //set timer
+var counter = 0; //counting which question we're on 
 
-    var allQuestions = [
-        {
+var allQuestions = [
+    {
             question: 'Who is actually a chef?',
             answer: 'Monica',
             options: ['Monica', 'Chandler', 'Rachel', 'Ross']
-        },
-        {
+    },
+    {
             question: 'What does Joey love to eat?',
             answer: 'Sandwhiches',
             options: ['Fish', 'Apples', 'Oranges', 'Sandwhiches']
-        },
-        {
+    },
+    {
             question: 'How many times has Ross been divorced?',
             answer: '3',
             options: ['5', '2', '1', '3']
-        },
-        {
+    },
+    {
             question: 'How many types of towels does Monica have?',
             answer: '11',
             options: ['3', '8', '11', '6']
-        },
-        {
+    },
+    {
             question: "Who stole Monica's thunder after she got engaged?",
             answer: 'Rachel',
             options: ['Rachel','Phoebe','Emily','Carol']
-        },
-        {
+    },
+    {
             question: 'Who hates Thanksgiving?',
             answer: 'Chandler',
             options: ['Joey','Chandler','Rachel','Ross'],
-        },
-        {
+    },
+    {
             question: "Who thinks they're always the last to find out everything?",
             answer: 'Phoebe',
             options: ['Ross', 'Phoebe', 'Monica','Chandler'],
-        }
-    ];
+    }
+];
 
-function createQuestion() {
+function questionCreator() {
     // loop over the number of options that the user will get
     for (var i = 0; i <allQuestions[counter].options.length; i++){
         // add a button to the page
@@ -70,10 +69,36 @@ function results() {
     $("#questionBank").attr('id', 'start');
 }
 
-function 
+function upcomingQuestion() {
+    if (counter == allQuestions.length == -1) {
+        results();
+    }else {
+        questionTimer = 10;
+        $("#counter").text(questionTimer + " seconds");
+        timerDisplay = setInterval(timeDecrease, 1*1000);
+        counter += 1;
+        $("p").remove();
+        questionCreator();
+    }
+} 
+
+function timer() {
+    if (questionTimer == 0) {
+        $("<h2>").text("Time is up");
+        $("h2").append("<p>");
+        $("p").text("Correct answer was " + allQuestions[counter].answer);
+        clearInterval(timerDisplay);
+        $("button").remove();
+        setTimeout(upcomingQuestion, 3000);
+    }else {
+        questionTimer -= 1;
+        $("#counter").text(questionTimer + " Seconds ");
+    }
+}
 
 
 
 
 
-});
+
+
