@@ -2,6 +2,10 @@ body {
     background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQQ1eHBUtf5-XyooaF2u11FNN-UhyBzSC4D9ugtJW8NF4a5gJcaA");
 }
 
+.container {
+    display: flex;
+}
+
 #start {
     margin-left: 40%;
     margin-top: 5%;
