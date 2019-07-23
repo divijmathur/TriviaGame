@@ -34,6 +34,16 @@ var allQuestions = [
             question: "Who thinks they're always the last to find out everything?",
             answer: 1,
             options: ['Ross', 'Phoebe', 'Monica','Chandler'],
+    },
+    {
+        question: "Joey says that giving Rachel pickles during her pregnancy is like giving him what?",
+        answer: 0,
+        options: ['Salad','Sandwich', 'Ice-cream', 'Milk'],
+    },
+    {
+        question: " What real place was the coffee shop Central Park based on?",
+        answer: 3,
+        options: ['Starbucks','Four Barrel Coffee', 'Petes', 'Manhattan Cafe '],
     }];
 
 var correctAnswers = 0; // correctly answered questions
@@ -47,11 +57,13 @@ var pick; //allows the computer to pick a random question to put to the user
 var index; //generates a random index number for the questions array to provide a random question
 var newArray = [];
 var holder = [];//array for holding the different question options to display to the user
-
+var audio = new Audio('assets/songs/file.mp3');
 $('#reset').hide();
 
 //when the start button is pressed run this function
 $('#start').on('click', function () {
+    // plays theme song for the friends soundtrack
+    audio.play();
     //hide the start button and get it out of the way
     $("#start").hide();
     //function to display the questions to be answered by the user
@@ -84,6 +96,7 @@ function decrease() {
         stop();
         $("#answerBlock").html("<p> Time is up! The correct answer is: " + pick.options[pick.answer] + "</p>");
         score();
+        audio.pause();
     }
 }
 
@@ -144,6 +157,7 @@ function score() {
         // need to see if all the questions were answered
         if((incorrectAnswers + correctAnswers) === qCount) {
             // empty the questionblock div in the html page
+            audio.pause();
             $("#questionBlock").empty();
             // add html to let the user know that the game is over 
             $("#questionBlock").html("<h3> Game Over! Here's how you did: </h3>");
